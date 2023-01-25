@@ -58,11 +58,7 @@
     for (let i = 0; i < discountValues.length; i++) {
 
         if (+discountValues[i].textContent > 0) {
-            console.log(discountValues[i].textContent);
-            console.log(finalPrices[i].textContent);
-
             let discountValue = +discountValues[i].textContent;
-
             finalPrices[i].textContent = getFinalPrice(discountValue);
         }
     }
