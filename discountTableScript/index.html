@@ -8,63 +8,61 @@
 <table class="table2" style="width: 400px;">
     <thead>
     <tr class="ee" style="background-color: #9c9c9c;">
-        <td style="height: 30px; width: 150px;"><span style="color: #ffffff;"><strong>Метраж (м2/м п.)</strong></span>
-        </td>
+        <td style="height: 30px; width: 150px;"><span style="color: #ffffff;"><strong>Метраж (м2/м п.)</strong></span></td>
         <td style="height: 30px; width: 94px;"><span style="color: #ffffff;"><strong>Скидка (%)</strong></span></td>
-        <td style="text-align: center;"><span style="color: #ffffff;"><strong>Цена (руб.)</strong></span>
-        </td>
+        <td style="text-align: center;"><span style="color: #ffffff;"><strong>Цена (руб.)</strong></span></td>
     </tr>
     </thead>
     <tbody>
     <tr class="f8" style="background-color: #f8f8f8;">
         <td class="one" style="width: 150px;">до 50</td>
-        <td class="discount" style=";">-</td>
-        <td id="base-price" class="discount-price" style="text-align: center;">1420</td>
+        <td class="discount" style="text-align: center;">-</td>
+        <td class="discount-price" id="base-price" style="text-align: center;">1420</td>
     </tr>
     <tr class="ee" style="background-color: #eeeeee;">
         <td style="width: 150px;">от 51 до 100</td>
-        <td class="discount" style="width: 94px;">5</td>
+        <td class="discount" style="width: 94px; text-align: center;">5</td>
         <td class="discount-price" style="text-align: center;"></td>
     </tr>
     <tr class="f8" style="background-color: #f8f8f8;">
         <td class="one" style="width: 150px;">от 101 до 200</td>
-        <td class="discount" style="width: 94px;">7</td>
-        <td class="discount-price" style="text-align: center;">1321</td>
+        <td class="discount" style="width: 94px; text-align: center;">7</td>
+        <td class="discount-price" style="text-align: center;"></td>
     </tr>
     <tr class="ee" style="background-color: #eeeeee;">
         <td class="one" style="text-align: left; width: 150px;">от 201 до 300</td>
-        <td class="discount" style="text-align: left; width: 94px;">10</td>
-        <td class="discount-price" style="text-align: center;">1292</td>
+        <td class="discount" style="width: 94px; text-align: center;">10</td>
+        <td class="discount-price" style="text-align: center;"></td>
     </tr>
     <tr class="f8" style="background-color: #f8f8f8;">
         <td class="one" style="width: 150px;">от 301 до 400</td>
-        <td class="discount" style="width: 94px;">12</td>
-        <td class="discount-price" style="text-align: center;">1250</td>
+        <td class="discount" style="width: 94px; text-align: center;">12</td>
+        <td class="discount-price" style="text-align: center;"></td>
     </tr>
     <tr class="ee" style="background-color: #eeeeee;">
         <td class="one" style="text-align: left; width: 150px;">от 401</td>
-        <td class="discount" style="text-align: left; width: 140px;">Специальная цена</td>
-        <td class="discount-price" style="text-align: center;">звоните!</td>
+        <td class="discount" colspan="2" style="text-align: left; width: 140px;">Специальная цена - звоните!</td>
     </tr>
     </tbody>
 </table>
 
 <script>
 
-    let discountValues = document.getElementsByClassName('discount');
-    let finalPrices = document.getElementsByClassName('discount-price');
-    let basePrice = +document.getElementById('base-price').textContent;
+    const discountValues = document.getElementsByClassName('discount');
+    const finalPrices = document.getElementsByClassName('discount-price');
+    const basePrice = Number(document.getElementById('base-price').textContent);
 
-    for (let i = 0; i < discountValues.length; i++) {
+    let getFinalPrice = (discountValue) => Math.round(basePrice / 100 * (100 - discountValue));
 
-        if (+discountValues[i].textContent > 0) {
-            let discountValue = +discountValues[i].textContent;
-            finalPrices[i].textContent = getFinalPrice(discountValue);
+    let setFinalPrice = (i) => {
+        if (Number(discountValues[i].textContent > 0)) {
+            let discountValue = Number(discountValues[i].textContent);
+            finalPrices[i].textContent = String(getFinalPrice(discountValue));
         }
     }
 
-    function getFinalPrice(discountValue) {
-        return Math.round(basePrice / 100 * (100 - discountValue));
+    for (let i = 0; i < discountValues.length; i++) {
+        setFinalPrice(i);
     }
 
 </script>
